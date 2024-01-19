@@ -1,16 +1,21 @@
-@ORG.Server_HostAddress = https://localhost:7189
+@ORG.Server_HostAddress = https://orgspelforening.azurewebsites.net/
 
+# Get all upcoming events
 GET {{ORG.Server_HostAddress}}/api/Events/all-upcoming-events
 Accept: application/json
 
+# Get all past events
 GET {{ORG.Server_HostAddress}}/api/Events/all-past-events
 Accept: application/json
 
+# Get all event information for a specific event
 GET {{ORG.Server_HostAddress}}/api/Events/all-event-information/{eventId}
 Accept: application/json
 
+# Get all posts
 GET {{ORG.Server_HostAddress}}/api/Posts/all-posts
 Accept: application/json
 
+# Get all post dates
 GET {{ORG.Server_HostAddress}}/api/Posts/all-post-dates
 Accept: application/json

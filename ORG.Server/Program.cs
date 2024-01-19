@@ -14,28 +14,30 @@ var keyVaultUrl = new Uri(builder.Configuration.GetSection("KeyVaultURL").Value!
 var azureCredential = new DefaultAzureCredential();
 builder.Configuration.AddAzureKeyVault(keyVaultUrl, azureCredential);
 
-// Services cors
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactAppPolicy",
-        builder => builder.WithOrigins("https://localhost:5173")
-                          .AllowAnyHeader()
+        builder => builder.AllowAnyHeader()
                           .AllowAnyMethod());
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline
+// Retrieve the dynamic origin from configuration
+var appUrl = builder.Configuration.GetSection("APP_URL").Value;
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-// App cors
 app.UseHttpsRedirection();
 app.UseRouting();
-app.UseCors("ReactAppPolicy");
+
+// Update the CORS policy with the dynamic origin
+app.UseCors(builder => builder.WithOrigins(appUrl).AllowAnyHeader().AllowAnyMethod());
+
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
@@ -43,5 +45,4 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllers();
 });
 
-// RUN APP
 app.Run();
