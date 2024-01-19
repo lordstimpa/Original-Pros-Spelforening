@@ -1,0 +1,28 @@
+@import "https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&family=Orbitron&display=swap";
+
+:root {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  overflow-y: scroll;
+}
+
+* {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Orbitron", Arial, Helvetica, sans-serif;
+  color: #444444;
+}
+
+p, li {
+  color: #444444;
+  font-size: 20px;
+}
+
+a {
+    font-size: 18px;
+}

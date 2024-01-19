@@ -1,0 +1,16 @@
+@ORG.Server_HostAddress = https://localhost:7189
+
+GET {{ORG.Server_HostAddress}}/api/Events/all-upcoming-events
+Accept: application/json
+
+GET {{ORG.Server_HostAddress}}/api/Events/all-past-events
+Accept: application/json
+
+GET {{ORG.Server_HostAddress}}/api/Events/all-event-information/{eventId}
+Accept: application/json
+
+GET {{ORG.Server_HostAddress}}/api/Posts/all-posts
+Accept: application/json
+
+GET {{ORG.Server_HostAddress}}/api/Posts/all-post-dates
+Accept: application/json
