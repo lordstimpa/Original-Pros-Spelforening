@@ -7,7 +7,7 @@ const PastEvents = () => {
     data: events,
     isError,
     isLoading,
-  } = API("https://localhost:7189/api/Events/all-upcomming-events");
+  } = API("https://orgspelforening.azurewebsites.net/api/Events/all-upcomming-events");
 
   return (
     <>
