@@ -1,67 +1,69 @@
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
-using Microsoft.Azure.KeyVault;
-using Microsoft.Azure.Services.AppAuthentication;
-using Microsoft.Extensions.Configuration.AzureKeyVault;
 using org_api.Service;
 
-class Program
+public class Program
 {
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddSingleton<HttpClient>();
-        builder.Services.AddSingleton<KeyService>();
+        // Services registration
+        builder.Services.AddHttpClient();
         builder.Services.AddControllers();
         builder.Services.AddAuthorization();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        if (builder.Environment.IsProduction())
-        {
-            var keyVaultURL = builder.Configuration.GetSection("KeyVaultConfig:KeyVaultURL");
-            var keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
-
-            builder.Configuration.AddAzureKeyVault(keyVaultURL.Value!.ToString(), new DefaultKeyVaultSecretManager());
-            var client = new SecretClient(new Uri(keyVaultURL.Value!.ToString()), new DefaultAzureCredential());
-
-            builder.Services.AddSingleton(client);
-        }
-
-        // Services cors
+        // CORS policy registration
         builder.Services.AddCors(options =>
         {
             options.AddPolicy("ReactAppPolicy",
                 builder => builder.WithOrigins(
                     "https://localhost:5173",
-                    "https://orgspelforening.azurewebsites.net/"
+                    "https://orgspelforening.azurewebsites.net"
                 )
                 .AllowAnyHeader()
                 .AllowAnyMethod());
         });
 
+        // Azure Key Vault setup
+        var keyVaultURL = builder.Configuration.GetSection("KeyVaultConfig:KeyVaultURL").Value;
+        var credential = new DefaultAzureCredential();
+        var secretClient = new SecretClient(new Uri(keyVaultURL), credential);
+        builder.Services.AddSingleton(secretClient);
+        builder.Services.AddSingleton<KeyService>();
+
+        // Development-specific configurations
+        if (builder.Environment.IsDevelopment())
+        {
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Your API", Version = "v1" });
+            });
+        }
+
+        // Configure application
         var app = builder.Build();
 
-        // Configure the HTTP request pipeline
         if (app.Environment.IsDevelopment())
         {
+            // Development-specific middleware
             app.UseSwagger();
             app.UseSwaggerUI();
         }
 
-        // App cors
+        // General middleware
         app.UseHttpsRedirection();
         app.UseRouting();
         app.UseCors("ReactAppPolicy");
         app.UseAuthorization();
-
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
         });
 
-        // RUN APP
+        // Run the application
         app.Run();
     }
 }
