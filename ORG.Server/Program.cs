@@ -52,8 +52,8 @@ public class Program
         // General middleware
         app.UseHttpsRedirection();
         app.UseStaticFiles();
-        app.UseRouting();
         app.UseCors("ReactAppPolicy");
+        app.UseRouting();
         app.UseAuthorization();
         app.UseEndpoints(endpoints =>
         {
