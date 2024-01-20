@@ -20,13 +20,11 @@ class Program
 
         if (builder.Environment.IsProduction())
         {
-            var kvURL = builder.Configuration.GetSection("KeyVaultConfig:KeyVaultURL");
-
+            var keyVaultURL = builder.Configuration.GetSection("KeyVaultConfig:KeyVaultURL");
             var keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
 
-            builder.Configuration.AddAzureKeyVault(kvURL.Value!.ToString(), new DefaultKeyVaultSecretManager());
-
-            var client = new SecretClient(new Uri(kvURL.Value!.ToString()), new DefaultAzureCredential());
+            builder.Configuration.AddAzureKeyVault(keyVaultURL.Value!.ToString(), new DefaultKeyVaultSecretManager());
+            var client = new SecretClient(new Uri(keyVaultURL.Value!.ToString()), new DefaultAzureCredential());
 
             builder.Services.AddSingleton(client);
         }
