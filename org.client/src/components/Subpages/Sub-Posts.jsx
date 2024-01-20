@@ -117,7 +117,7 @@ const Posts = () => {
     data: response,
     isError,
     isLoading,
-  } = API(`${process.env.API_URL}/api/Posts/all-posts`);
+  } = API(`https://orgspelforening.azurewebsites.net/api/Posts/all-posts`);
 
   const formatMessage = (message) => {
     return message.replace(/\n/g, "<br>");

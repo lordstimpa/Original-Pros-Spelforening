@@ -9,8 +9,5 @@ export default defineConfig({
             cert: 'C:/Utveckling/SSL/localhost/localhost.pem',
         }
     },
-    define: {
-        'process.env.API_URL': 'https://localhost:5173',
-    },
     plugins: [react()],
 })

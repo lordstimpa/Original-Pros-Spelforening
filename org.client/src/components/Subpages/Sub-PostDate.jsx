@@ -50,7 +50,7 @@ const PostDate = () => {
     data: datesPosted,
     isError,
     isLoading,
-  } = API(`${process.env.API_URL}/api/Posts/all-post-dates`);
+  } = API(`https://orgspelforening.azurewebsites.net/api/Posts/all-post-dates`);
 
   return (
     <Body>

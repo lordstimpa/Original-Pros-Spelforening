@@ -8,7 +8,7 @@ const EventInfo = () => {
     data: eventInfo,
     isError,
     isLoading,
-  } = API(`${process.env.API_URL}/api/Events/all-event-information/${id}`);
+  } = API(`$https://orgspelforening.azurewebsites.net/api/Events/all-event-information/${id}`);
 
   const formatDescription = (description) => {
     return description ? description.replace(/\n/g, "<br>") : "";
