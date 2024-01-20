@@ -8,12 +8,12 @@ namespace org_api.Service
     public class KeyService
     {
         private readonly IConfiguration _configuration;
-        private readonly HttpClient _httpClient;
+        private readonly SecretClient _secretClient;
 
-        public KeyService(IConfiguration configuration, HttpClient httpClient)
+        public KeyService(IConfiguration configuration, SecretClient secretClient)
         {
             _configuration = configuration;
-            _httpClient = httpClient;
+            _secretClient = secretClient;
         }
 
         public string AppId => GetSecret("FacebookAppId");
@@ -24,15 +24,17 @@ namespace org_api.Service
         public string LongLivedUserToken => GetSecret("FacebookLongLivedUserToken");
         public string PageAccessToken => GetSecret("FacebookPageAccessToken");
 
-
-        private string GetSecret(string secretName)
+        public string GetSecret(string secretName)
         {
-            var secret = _configuration.GetSection(secretName).Value;
-            if (string.IsNullOrEmpty(secret))
+            try
             {
-                throw new Exception($"Secret {secretName} not found.");
+                var secret = _secretClient.GetSecret(secretName).Value.Value;
+                return secret;
             }
-            return secret;
+            catch (Exception ex)
+            {
+                throw new Exception($"Error retrieving secret {secretName} from Key Vault.", ex);
+            }
         }
     }
 }

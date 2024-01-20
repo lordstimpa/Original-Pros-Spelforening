@@ -1,48 +1,69 @@
 using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using Microsoft.Azure.KeyVault;
+using Microsoft.Azure.Services.AppAuthentication;
+using Microsoft.Extensions.Configuration.AzureKeyVault;
 using org_api.Service;
 
-var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddSingleton<HttpClient>();
-builder.Services.AddSingleton<KeyService>();
-builder.Services.AddControllers();
-builder.Services.AddAuthorization();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var keyVaultUrl = new Uri(builder.Configuration.GetSection("KeyVaultURL").Value!);
-var azureCredential = new DefaultAzureCredential();
-builder.Configuration.AddAzureKeyVault(keyVaultUrl, azureCredential);
-
-builder.Services.AddCors(options =>
+class Program
 {
-    options.AddPolicy("ReactAppPolicy",
-        builder => builder.AllowAnyHeader()
-                          .AllowAnyMethod());
-});
+    static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-var app = builder.Build();
+        builder.Services.AddSingleton<HttpClient>();
+        builder.Services.AddSingleton<KeyService>();
+        builder.Services.AddControllers();
+        builder.Services.AddAuthorization();
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
 
-// Retrieve the dynamic origin from configuration
-var appUrl = builder.Configuration.GetSection("APP_URL").Value;
+        if (builder.Environment.IsProduction())
+        {
+            var kvURL = builder.Configuration.GetSection("KeyVaultConfig:KeyVaultURL");
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+            var keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
+
+            builder.Configuration.AddAzureKeyVault(kvURL.Value!.ToString(), new DefaultKeyVaultSecretManager());
+
+            var client = new SecretClient(new Uri(kvURL.Value!.ToString()), new DefaultAzureCredential());
+
+            builder.Services.AddSingleton(client);
+        }
+
+        // Services cors
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("ReactAppPolicy",
+                builder => builder.WithOrigins(
+                    "https://localhost:5173",
+                    "https://orgspelforening.azurewebsites.net/"
+                )
+                .AllowAnyHeader()
+                .AllowAnyMethod());
+        });
+
+        var app = builder.Build();
+
+        // Configure the HTTP request pipeline
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
+
+        // App cors
+        app.UseHttpsRedirection();
+        app.UseRouting();
+        app.UseCors("ReactAppPolicy");
+        app.UseAuthorization();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+        });
+
+        // RUN APP
+        app.Run();
+    }
 }
-
-app.UseHttpsRedirection();
-app.UseRouting();
-
-// Update the CORS policy with the dynamic origin
-app.UseCors(builder => builder.WithOrigins(appUrl).AllowAnyHeader().AllowAnyMethod());
-
-app.UseAuthorization();
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
-
-app.Run();
