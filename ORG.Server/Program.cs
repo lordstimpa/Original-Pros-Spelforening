@@ -60,8 +60,9 @@ public class Program
             endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-        });
 
+            endpoints.MapFallbackToFile("index.html");
+        });
 
         // Run the application
         app.Run();
