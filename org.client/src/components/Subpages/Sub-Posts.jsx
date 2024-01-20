@@ -117,7 +117,7 @@ const Posts = () => {
     data: response,
     isError,
     isLoading,
-  } = API("https://localhost:7189/api/Posts/all-posts");
+  } = API(`${process.env.API_URL}/api/Posts/all-posts`);
 
   const formatMessage = (message) => {
     return message.replace(/\n/g, "<br>");

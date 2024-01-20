@@ -50,7 +50,7 @@ const PostDate = () => {
     data: datesPosted,
     isError,
     isLoading,
-  } = API("https://localhost:7189/api/Posts/all-post-dates");
+  } = API(`${process.env.API_URL}/api/Posts/all-post-dates`);
 
   return (
     <Body>
