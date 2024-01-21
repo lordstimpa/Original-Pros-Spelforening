@@ -11,23 +11,23 @@ const Body = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-    background: #FFF;
+  background: #fff;
 
   & .Parent {
-      width: 100%;
-      max-width: 1600px;
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-top: 100px;
+    width: 100%;
+    max-width: 1600px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 100px;
 
     & .Child {
-       margin: 0 20px 100px 20px;
+      margin: 0 20px 100px 20px;
       width: 250px;
       height: 310px;
       padding: 2rem;
-      color: #444444;;
+      color: #444444;
       background: #eaeaea;
       border-radius: 2rem;
       border: 2px solid rgba(243, 0, 103, 1);
@@ -50,11 +50,11 @@ const Body = styled.div`
       }
 
       & p {
-        color: #444444;;
+        color: #444444;
       }
 
       & .Icon {
-        color: #444444;;
+        color: #444444;
         font-size: 8rem;
       }
     }
@@ -93,7 +93,7 @@ const More = () => {
             </p>
           </div>
         </Link>
-        <a className="Child" href="https://discord.gg/8JS23pMX">
+        <a className="Child" href="https://discord.gg/xsFZTPvnGt">
           <div>
             <PiGlobe className="Icon" />
             <h2>Online</h2>

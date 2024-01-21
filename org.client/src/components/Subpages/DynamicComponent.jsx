@@ -9,12 +9,12 @@ const Body = styled.div`
   background: #eaeaea;
   color: #444444;
   display: grid;
-  grid-template-columns: 45px 175px minmax(auto, 1350px) 175px 45px;
+  grid-template-columns: 1fr 25px 175px fit-content(1350px) 175px 25px 1fr;
   grid-template-rows: 4rem 250px auto 5em;
 
   // Title section
   & .Title {
-    grid-column: 1 / 6;
+    grid-column: 1 / 8;
     grid-row: 2 / 3;
     background-image: url(${(props) => props.image});
     background-size: cover;
@@ -36,7 +36,7 @@ const Body = styled.div`
   & .Info {
     display: flex;
     flex-direction: column;
-    grid-column: 3 / 4;
+    grid-column: 4 / 5;
     grid-row: 3 / 4;
     height: fit-content;
     background: #eaeaea;
@@ -179,7 +179,7 @@ const Body = styled.div`
   }
 
   @media only screen and (max-width: 1280px) {
-    grid-template-columns: 1rem auto 70% auto 1rem;
+    grid-template-columns: 1fr 25px 175px fit-content(1350px) auto 25px 1fr;
 
     & .Title {
       & h1 {
@@ -188,15 +188,15 @@ const Body = styled.div`
     }
 
     & .Info {
-      grid-column: 3 / 5;
+      grid-column: 4 / 6;
     }
   }
 
   @media only screen and (max-width: 900px) {
-    grid-template-rows: 4rem 250px fit-content(100px) auto 5rem;
+    grid-template-columns: 1fr 25px auto 25px 1fr;
 
     & .Info {
-      grid-column: 2 / 4;
+      grid-column: 3 / 4;
       grid-row: 3 / 4;
       padding: 0;
       padding-top: 2rem;

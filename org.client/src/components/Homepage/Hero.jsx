@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { useEffect, useRef } from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import { SlArrowDown } from "react-icons/sl";
 import Gamer from "../../assets/gamer.jpg";
 
@@ -94,28 +95,29 @@ const Body = styled.div`
 
   @media only screen and (max-width: 900px) {
     & .InfoCont {
-      padding: 1em;
-      margin: 1em;
+      padding: 15px;
+      margin: 25px;
     }
     & .Title {
-      font-size: 0.8rem;
+      font-size: 0.9rem;
     }
     & .Text > p {
-      font-size: 0.8rem;
+      font-size: 0.9rem;
     }
     & .Medlem > a {
-      font-size: 0.8rem;
+      font-size: 0.9rem;
     }
   }
 `;
 
 const Hero = ({ generalRef }) => {
-  // Click
+  const [scrollPosition, setScrollPosition] = useState(0);
+
   const handleClick = () => {
     generalRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const backgroundImage =  Gamer;
+  const backgroundImage = Gamer;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -142,10 +144,7 @@ const Hero = ({ generalRef }) => {
             Vi är en spelförening som strävar efter att samla alla spelfantaster
             under en flagga!
           </p>
-          <p>
-            Bli medlem för att delta på LAN, turneringar och annat
-            skoj.
-          </p>
+          <p>Bli medlem för att delta på LAN, turneringar och annat skoj.</p>
         </div>
         <div className="Medlem">
           <a href="https://ebas.sverok.se/blimedlem/25677">Bli medlem nu!</a>

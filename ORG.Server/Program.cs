@@ -46,8 +46,11 @@ public class Program
         // Configure application
         var app = builder.Build();
 
-        app.UseSwagger();
-        app.UseSwaggerUI();
+        if (builder.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
 
         // General middleware
         app.UseHttpsRedirection();

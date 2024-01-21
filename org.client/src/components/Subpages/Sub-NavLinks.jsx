@@ -4,9 +4,10 @@ import { NavLink } from "react-router-dom";
 import { AiOutlineDown } from "react-icons/ai";
 
 const Body = styled.div`
-  grid-column: 2 / 3;
+  grid-column: 3 / 4;
   grid-row: 3 / 4;
   padding-top: 2rem;
+  width: 175px;
 
   & .Links {
     margin-bottom: 2rem;
@@ -20,7 +21,6 @@ const Body = styled.div`
     }
 
     & .LinkContainer {
-
       & .MainLinkContainer {
         display: flex;
         justify-content: space-between;

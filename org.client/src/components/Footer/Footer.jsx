@@ -146,7 +146,7 @@ const Footer = () => {
             <a href="https://steamcommunity.com/groups/originalpro">
               <BsSteam className="Icon" />
             </a>
-            <a href="https://discord.gg/8JS23pMX">
+            <a href="https://discord.gg/xsFZTPvnGt">
               <BsDiscord className="Icon" />
             </a>
           </div>

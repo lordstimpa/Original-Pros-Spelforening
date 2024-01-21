@@ -6,10 +6,16 @@ const Body = styled.div`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 60px 40px -7px;
   display: flex;
   justify-content: center;
+  padding: 0 25px;
 
   & .wrapper {
-      max-width: 1600px;
-      padding: 100px 45px;
+    width: 100%;
+    max-width: 1600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 25px;
   }
 
   & .Title {
@@ -22,82 +28,83 @@ const Body = styled.div`
     }
   }
 
-  & .Body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-  }
-
   & .Img {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 300px;
-      border-radius: 2rem;
-      border: 2px solid rgba(243, 0, 103, 1);
-      overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    width: 100%;
+    border-radius: 2rem;
+    border: 2px solid rgba(243, 0, 103, 1);
+    overflow: hidden;
 
-      & img {
-        object-fit: cover;
-      }
-
-      & h1 {
-        position: absolute;
-        color: #FFF;
-        font-size: 7rem;
-        z-index: 1;
-        }
+    & img {
+      object-fit: cover;
     }
 
+    & h1 {
+      position: absolute;
+      color: #fff;
+      font-size: 7rem;
+      z-index: 1;
+    }
+  }
+
   & .Text {
-      margin: 1rem;
+    margin: 1rem;
     > p {
-        padding: 1rem;
+      padding: 1rem;
     }
 
     > a {
-        padding: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: #444444;
+      padding: 1rem;
     }
   }
 
-  @media only screen and (max-width: 1170px) {
-  }
-
-  @media only screen and (max-width: 810px) {
-    & .Title {
+  @media only screen and (max-width: 890px) {
+    & .Img {
       & h1 {
-        font-size: 10.5vw;
+        font-size: 12vw;
       }
+    }
+
+    & .Text {
+      margin: 1rem 0;
     }
   }
 `;
 
 const Community = () => {
-    return (
-        <Body>
-            <div className="wrapper">
-                <div className="Body">
-                    <div className="Img">
-                        <h1>Gemenskap</h1>
-                        <img src={ctt} />
-                    </div>
-                    <div className="Text">
-                        <p>
-                            Vår gemenskap sträcker sig bortom spelandet. Gå med i vår Discord-server och träffa andra entusiaster, dela dina spelupplevelser och diskutera de senaste spelnyheterna. Vi tror på att skapa starka band och vänskaper bland våra medlemmar.
-                        </p>
-                        <p>
-                            I vår gemenskap har vi även dedikerade kanaler för att hjälpa varandra med tekniska frågor, strategier i spel och bara för att ha kul samtidigt. Vi tror att en stark community är kärnan i en framgångsrik spelförening.
-                        </p>
-                        <a href="https://discord.com/invite/8JS23pMX">
-                            Gå med i vår Discord server!
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </Body>
-    );
+  return (
+    <Body>
+      <div className="wrapper">
+        <div className="Img">
+          <h1>Gemenskap</h1>
+          <img src={ctt} />
+        </div>
+        <div className="Text">
+          <p>
+            Vår gemenskap sträcker sig bortom spelandet. Gå med i vår
+            Discord-server och träffa andra entusiaster, dela dina
+            spelupplevelser och diskutera de senaste spelnyheterna. Vi tror på
+            att skapa starka band och vänskaper bland våra medlemmar.
+          </p>
+          <p>
+            I vår gemenskap har vi även dedikerade kanaler för att hjälpa
+            varandra med tekniska frågor, strategier i spel och bara för att ha
+            kul samtidigt. Vi tror att en stark community är kärnan i en
+            framgångsrik spelförening.
+          </p>
+          <a href="https://discord.gg/xsFZTPvnGt">
+            Gå med i vår Discord server!
+          </a>
+        </div>
+      </div>
+    </Body>
+  );
 };
 
 export default Community;

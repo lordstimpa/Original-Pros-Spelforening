@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import API from "../API/API";
 import Loading from "../Subpages/Loading";
 
 const Body = styled.div`
-  grid-column: 4 / 5;
+  grid-column: 5 / 6;
   grid-row: 3 / 4;
   padding-top: 2rem;
 
