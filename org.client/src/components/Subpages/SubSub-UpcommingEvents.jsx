@@ -8,7 +8,7 @@ const PastEvents = () => {
     isError,
     isLoading,
   } = API(
-    `$https://orgspelforening.azurewebsites.net/api/Events/all-upcomming-events`
+    "https://orgspelforening.azurewebsites.net/api/Events/all-upcomming-events"
   );
 
   return (
@@ -37,7 +37,7 @@ const PastEvents = () => {
         )}
         {!isLoading &&
           !isError &&
-          events.length > 0 &&
+          events &&
           events.map((event) => (
             <Link
               to={`/event/upcomming-events/${event.id}`}
