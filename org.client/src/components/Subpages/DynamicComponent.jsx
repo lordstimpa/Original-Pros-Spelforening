@@ -9,7 +9,7 @@ const Body = styled.div`
   background: #eaeaea;
   color: #444444;
   display: grid;
-  grid-template-columns: 1fr 25px 175px fit-content(1350px) 175px 25px 1fr;
+  grid-template-columns: 1fr 25px 175px minmax(0, 1350px) 175px 25px 1fr;
   grid-template-rows: 4rem 250px auto 5em;
 
   // Title section
@@ -179,7 +179,7 @@ const Body = styled.div`
   }
 
   @media only screen and (max-width: 1280px) {
-    grid-template-columns: 1fr 25px 175px fit-content(1350px) auto 25px 1fr;
+    grid-template-columns: 1fr 25px 175px minmax(0, 1350px) auto 25px 1fr;
 
     & .Title {
       & h1 {
@@ -193,7 +193,7 @@ const Body = styled.div`
   }
 
   @media only screen and (max-width: 900px) {
-    grid-template-columns: 1fr 25px auto 25px 1fr;
+    grid-template-columns: 1fr 25px minmax(0, 1350px) 25px 1fr;
 
     & .Info {
       grid-column: 3 / 4;
