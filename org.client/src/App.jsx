@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { useRef } from 'react';
+import { useRef } from "react";
 // Nav
 import Nav from "./components/Navigation/Nav";
 // Homepage
@@ -155,7 +155,6 @@ function App() {
             element={<DynamicComponent contentComponent={<CookiePolicy />} />}
           />
         </Routes>
-
         <Footer />
       </Router>
     </>

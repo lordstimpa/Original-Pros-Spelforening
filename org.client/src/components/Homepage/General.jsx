@@ -141,7 +141,7 @@ const General = ({ generalRef }) => {
           </div>
 
           <div className="Img">
-            <img src={ctt} />
+            <img src={ctt} alt="Counter Strike characters." />
           </div>
         </div>
       </div>

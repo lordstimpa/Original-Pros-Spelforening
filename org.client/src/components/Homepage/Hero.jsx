@@ -3,13 +3,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { SlArrowDown } from "react-icons/sl";
 import Gamer from "../../assets/gamer.jpg";
+import { Helmet } from "react-helmet";
 
 const Background = styled.div`
   position: fixed;
-  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  bottom: ${(props) => props.scrollPosition * 0.3}px;
   background-image: url(${(props) => props.backgroundImg});
   background-size: cover;
   background-position: center;
@@ -122,6 +123,7 @@ const Hero = ({ generalRef }) => {
   useEffect(() => {
     const handleScroll = () => {
       setScrollPosition(window.scrollY);
+      setScrollPosition(Math.min(newScrollPosition, 100));
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -133,7 +135,18 @@ const Hero = ({ generalRef }) => {
 
   return (
     <Body>
-      <Background backgroundImg={backgroundImage} />
+      <Helmet>
+        <title>ORG Gaming Association</title>
+        <meta
+          name="description"
+          content="From small beginnings to making our common goal a reality. Creating a Gaming Association which welcomes all true gamers."
+        />
+      </Helmet>
+
+      <Background
+        backgroundImg={backgroundImage}
+        scrollPosition={scrollPosition}
+      />
 
       <div className="InfoCont">
         <div className="Title">

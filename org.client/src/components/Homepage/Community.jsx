@@ -83,7 +83,7 @@ const Community = () => {
       <div className="wrapper">
         <div className="Img">
           <h1>Gemenskap</h1>
-          <img src={ctt} />
+          <img src={ctt} alt="Keyboard with RGB lighting." />
         </div>
         <div className="Text">
           <p>

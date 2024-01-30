@@ -1,6 +1,16 @@
+import { Helmet } from "react-helmet";
+
 const PrivacyNotice = () => {
   return (
     <>
+      <Helmet>
+        <title>ORG - Privacy Notice</title>
+        <meta
+          name="description"
+          content="Privacy notice of the official website of Original Pros Gaming Association."
+        />
+      </Helmet>
+
       <div className="Title">
         <h1>REGLER & SEKRETESS</h1>
       </div>

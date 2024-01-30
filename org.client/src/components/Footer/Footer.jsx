@@ -135,7 +135,7 @@ const Footer = () => {
       <div className="MainContainer1">
         <div className="Container1">
           <div className="ImgContainer">
-            <img src={ORG} />
+            <img src={ORG} alt="Original Pros Gaming Association logo." />
           </div>
         </div>
         <div className="Container2">

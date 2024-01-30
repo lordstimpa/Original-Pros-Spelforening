@@ -1,6 +1,7 @@
 import API from "../API/API";
 import { Link } from "react-router-dom";
 import Loading from "../Subpages/Loading";
+import { Helmet } from "react-helmet";
 
 const PastEvents = () => {
   const {
@@ -13,6 +14,14 @@ const PastEvents = () => {
 
   return (
     <>
+      <Helmet>
+        <title>ORG - Upcomming Events</title>
+        <meta
+          name="description"
+          content="View our upcomming events we are hosting for our members at Original Pros Gaming Association!"
+        />
+      </Helmet>
+
       <div className="Title">
         <h1>EVENT</h1>
       </div>
@@ -50,7 +59,7 @@ const PastEvents = () => {
                   {event.start_date} - {event.start_time}
                 </p>
               </div>
-              <img src={event.cover_source} alt="Event Cover" />
+              <img src={event.cover_source} alt="Event cover image." />
             </Link>
           ))}
       </div>

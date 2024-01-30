@@ -1,8 +1,17 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 
 const Statutes = () => {
   return (
     <>
+      <Helmet>
+        <title>ORG - Statutes</title>
+        <meta
+          name="description"
+          content="Explore the statutes that define Original Pros Gaming Association."
+        />
+      </Helmet>
+
       <div className="Title">
         <h1>OM ORG</h1>
       </div>
@@ -168,7 +177,9 @@ const Statutes = () => {
             mars, under förutsättning att medlemmarna godkänner det.
           </p>
 
-          <p><strong>Detta ska alltid tas upp på ett ordinarie årsmöte:</strong></p>
+          <p>
+            <strong>Detta ska alltid tas upp på ett ordinarie årsmöte:</strong>
+          </p>
           <ol>
             <li> Mötets öppnande</li>
             <li> Beslut om mötets giltighet</li>

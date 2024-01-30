@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import API from "../API/API";
 import Loading from "../Subpages/Loading";
+import { Helmet } from "react-helmet";
 
 const EventInfo = () => {
   const { id } = useParams();
@@ -8,7 +9,9 @@ const EventInfo = () => {
     data: eventInfo,
     isError,
     isLoading,
-  } = API(`$https://orgspelforening.azurewebsites.net/api/Events/all-event-information/${id}`);
+  } = API(
+    `$https://orgspelforening.azurewebsites.net/api/Events/all-event-information/${id}`
+  );
 
   const formatDescription = (description) => {
     return description ? description.replace(/\n/g, "<br>") : "";
@@ -16,6 +19,14 @@ const EventInfo = () => {
 
   return (
     <>
+      <Helmet>
+        <title>ORG - Event Information</title>
+        <meta
+          name="description"
+          content="View events hosted by Original Pros Gaming Association."
+        />
+      </Helmet>
+
       <div className="Title">
         <h1>EVENT</h1>
       </div>

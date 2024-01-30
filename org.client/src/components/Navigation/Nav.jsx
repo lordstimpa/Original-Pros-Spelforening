@@ -231,7 +231,7 @@ const Nav = () => {
       <div className="First">
         <div className="NameContainer">
           <Link to="/" className="Org">
-            <img src={Org}></img>
+            <img src={Org} alt=""></img>
           </Link>
         </div>
 

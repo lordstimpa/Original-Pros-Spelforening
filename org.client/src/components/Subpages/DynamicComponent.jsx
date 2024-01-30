@@ -67,6 +67,12 @@ const Body = styled.div`
       padding: 0.2rem 3.2rem;
     }
 
+    & #linkurl {
+      font-weight: 700;
+      text-decoration: none;
+      color: #444444;
+    }
+
     // Error / Loading / Notfound
     & .Loading,
     .Error,

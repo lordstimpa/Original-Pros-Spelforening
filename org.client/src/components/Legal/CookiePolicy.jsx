@@ -1,6 +1,16 @@
+import { Helmet } from "react-helmet";
+
 const CookiePolicy = () => {
   return (
     <>
+      <Helmet>
+        <title>ORG - Cookie Policy</title>
+        <meta
+          name="description"
+          content="Cookie policy of the official website of Original Pros Gaming Association."
+        />
+      </Helmet>
+
       <div className="Title">
         <h1>REGLER & SEKRETESS</h1>
       </div>

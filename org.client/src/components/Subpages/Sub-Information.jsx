@@ -1,8 +1,17 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 
 const Information = () => {
   return (
     <>
+      <Helmet>
+        <title>ORG - About Us</title>
+        <meta
+          name="description"
+          content="If you like gaming and do it with new friends then we are the gaming association for you!"
+        />
+      </Helmet>
+
       <div className="Title">
         <h1>OM ORG</h1>
       </div>

@@ -1,6 +1,16 @@
+import { Helmet } from "react-helmet";
+
 const TermsOfService = () => {
   return (
     <>
+      <Helmet>
+        <title>ORG - Terms of Service</title>
+        <meta
+          name="description"
+          content="Terms of Service of the official website of Original Pros Gaming Association."
+        />
+      </Helmet>
+
       <div className="Title">
         <h1>REGLER & SEKRETESS</h1>
       </div>

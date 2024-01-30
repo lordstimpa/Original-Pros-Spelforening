@@ -1,0 +1,5 @@
+﻿User-agent: *
+Disallow: /admin/
+Disallow: /secret-page.html
+
+Sitemap: https://orgspelforening.azurewebsites.net/sitemap.xml

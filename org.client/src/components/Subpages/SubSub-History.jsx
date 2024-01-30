@@ -1,8 +1,17 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 
 const History = () => {
   return (
     <>
+      <Helmet>
+        <title>ORG - History</title>
+        <meta
+          name="description"
+          content="From small beginnings to making our common goal a reality. Creating a Gaming Association which welcomes all true gamers."
+        />
+      </Helmet>
+
       <div className="Title">
         <h1>OM ORG</h1>
       </div>
