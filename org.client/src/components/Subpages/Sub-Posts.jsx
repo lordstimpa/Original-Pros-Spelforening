@@ -7,14 +7,15 @@ import Loading from "../Subpages/Loading";
 import { Helmet } from "react-helmet";
 
 const Body = styled.div`
-  min-height: 100svh;
   min-width: 100%;
+  height: 100svh;
   background-image: url(${(props) => props.backgroundImg});
   background-size: cover;
   background-position: center;
   display: grid;
   grid-template-columns: 1fr 1200px 1fr;
   grid-template-rows: 4rem 250px auto 5em;
+  overflow: hidden;
 
   & .Title {
     grid-column: 2 / 3;
@@ -39,6 +40,25 @@ const Body = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: 0.8rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 1rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #f30067;
+      border-radius: 1rem;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #444444;
+    }
 
     // Error / Loading / Notfound
     & .Loading,
@@ -63,7 +83,7 @@ const Body = styled.div`
       backdrop-filter: blur(25px);
       background: rgba(0, 0, 0, 0.4);
       padding: 2em;
-      margin: 1em;
+      margin: 0 1rem 2rem 1rem;
 
       & h2 {
         color: #eaeaea;
@@ -79,7 +99,7 @@ const Body = styled.div`
   }
 
   @media only screen and (max-width: 1500px) {
-    grid-template-columns: 1fr 95% 1fr;
+    grid-template-columns: 1fr 92% 1fr;
 
     & .Title {
       & h1 {
@@ -133,51 +153,51 @@ const Posts = () => {
     }
   }, [postId, navigate, isLoading, response]);
 
-    return (
+  return (
     <>
-    <Helmet>
-      <title>ORG - Latest News</title>
-      <meta
-        name="description"
-        content="View latest new from Original Pros Gaming Association!"
-      />
-    </Helmet>
+      <Helmet>
+        <title>ORG - Latest News</title>
+        <meta
+          name="description"
+          content="View latest new from Original Pros Gaming Association!"
+        />
+      </Helmet>
 
-    <Body backgroundImg={Gamer}>
-      <div className="Title">
-        <h1>SENASTE NYTT!</h1>
-      </div>
-      <div className="PostOuterContainer">
-        {isLoading && (
-          <div className="Loading">
-            <Loading />
-          </div>
-        )}
-        {isError && (
-          <div className="Error">
-            <p>Ett fel inträffade vid hämtning av inlägg.</p>
-          </div>
-        )}
-        {!isLoading && !isError && response.length === 0 && (
-          <div className="NotFound">
-            <p>Inga inlägg hittades.</p>
-          </div>
-        )}
-        {response &&
-          response.map((post) => (
-            <div className="PostInnerContainer" key={post.id} id={post.id}>
-              <h2>
-                {post.start_date} - {post.start_time}
-              </h2>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: formatMessage(post.message || post.story),
-                }}
-              />
+      <Body backgroundImg={Gamer}>
+        <div className="Title">
+          <h1>SENASTE NYTT!</h1>
+        </div>
+        <div className="PostOuterContainer">
+          {isLoading && (
+            <div className="Loading">
+              <Loading />
             </div>
-          ))}
-      </div>
-    </Body>
+          )}
+          {isError && (
+            <div className="Error">
+              <p>Ett fel inträffade vid hämtning av inlägg.</p>
+            </div>
+          )}
+          {!isLoading && !isError && response.length === 0 && (
+            <div className="NotFound">
+              <p>Inga inlägg hittades.</p>
+            </div>
+          )}
+          {response &&
+            response.map((post) => (
+              <div className="PostInnerContainer" key={post.id} id={post.id}>
+                <h2>
+                  {post.start_date} - {post.start_time}
+                </h2>
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: formatMessage(post.message || post.story),
+                  }}
+                />
+              </div>
+            ))}
+        </div>
+      </Body>
     </>
   );
 };
