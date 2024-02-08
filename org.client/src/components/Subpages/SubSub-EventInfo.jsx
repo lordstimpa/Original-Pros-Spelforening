@@ -10,12 +10,20 @@ const EventInfo = () => {
     isError,
     isLoading,
   } = API(
-    `$https://orgspelforening.azurewebsites.net/api/Events/all-event-information/${id}`
+    `https://orgspelforening.azurewebsites.net/api/Events/all-event-information/${id}`
   );
 
-  const formatDescription = (description) => {
-    return description ? description.replace(/\n/g, "<br>") : "";
-  };
+    const formatDescription = (description) => {
+        if (!description) return { __html: "" };
+
+        const urlRegex = /(https?:\/\/[^\s]+)/g;
+        const formattedDescription = description.replace(urlRegex, (url) => {
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+        });
+
+        const finalDescription = formattedDescription.replace(/\n/g, "<br>");
+        return { __html: finalDescription };
+    };
 
   return (
     <>
@@ -47,7 +55,7 @@ const EventInfo = () => {
             <p>Ingen event information hittades.</p>
           </div>
         )}
-        {eventInfo && (
+        {!isLoading && !isError && eventInfo && (
           <>
             <div className="EventHeader">
               <h3 className="EventName">{eventInfo.name}</h3>
@@ -57,7 +65,11 @@ const EventInfo = () => {
             </div>
 
             <div>
-              <p>{formatDescription(eventInfo.description)}</p>
+              <p
+                dangerouslySetInnerHTML={formatDescription(
+                  eventInfo.description
+                )}
+              />
             </div>
           </>
         )}

@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import API from "../API/API";
 import Gamer from "../../assets/gamer.jpg";
 import Loading from "../Subpages/Loading";
+import { Helmet } from "react-helmet";
 
 const Body = styled.div`
   min-height: 100svh;
@@ -132,7 +133,16 @@ const Posts = () => {
     }
   }, [postId, navigate, isLoading, response]);
 
-  return (
+    return (
+    <>
+    <Helmet>
+      <title>ORG - Latest News</title>
+      <meta
+        name="description"
+        content="View latest new from Original Pros Gaming Association!"
+      />
+    </Helmet>
+
     <Body backgroundImg={Gamer}>
       <div className="Title">
         <h1>SENASTE NYTT!</h1>
@@ -168,6 +178,7 @@ const Posts = () => {
           ))}
       </div>
     </Body>
+    </>
   );
 };
 
