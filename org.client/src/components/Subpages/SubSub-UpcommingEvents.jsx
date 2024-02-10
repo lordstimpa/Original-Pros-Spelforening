@@ -1,7 +1,7 @@
 import API from "../API/API";
 import { Link } from "react-router-dom";
 import Loading from "../Subpages/Loading";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const PastEvents = () => {
   const {
@@ -13,7 +13,7 @@ const PastEvents = () => {
   );
 
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <title>ORG - Upcomming Events</title>
         <meta
@@ -63,7 +63,7 @@ const PastEvents = () => {
             </Link>
           ))}
       </div>
-    </>
+    </HelmetProvider>
   );
 };
 

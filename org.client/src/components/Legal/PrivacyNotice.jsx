@@ -1,8 +1,8 @@
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const PrivacyNotice = () => {
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <title>ORG - Privacy Notice</title>
         <meta
@@ -115,7 +115,7 @@ const PrivacyNotice = () => {
           </a>
         </div>
       </div>
-    </>
+    </HelmetProvider>
   );
 };
 

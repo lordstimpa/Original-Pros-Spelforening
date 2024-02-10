@@ -1,9 +1,9 @@
 import React from "react";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const History = () => {
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <title>ORG - History</title>
         <meta
@@ -67,7 +67,7 @@ const History = () => {
           </p>
         </div>
       </div>
-    </>
+    </HelmetProvider>
   );
 };
 

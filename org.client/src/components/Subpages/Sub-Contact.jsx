@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const Contact = () => {
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <title>ORG - Contact</title>
         <meta
@@ -35,7 +35,7 @@ const Contact = () => {
           </p>
         </div>
       </div>
-    </>
+    </HelmetProvider>
   );
 };
 

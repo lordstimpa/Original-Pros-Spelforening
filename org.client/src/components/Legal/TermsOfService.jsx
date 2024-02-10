@@ -1,8 +1,8 @@
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const TermsOfService = () => {
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <title>ORG - Terms of Service</title>
         <meta
@@ -145,7 +145,7 @@ const TermsOfService = () => {
           </a>
         </div>
       </div>
-    </>
+    </HelmetProvider>
   );
 };
 

@@ -67,10 +67,25 @@ const Body = styled.div`
       padding: 0.2rem 3.2rem;
     }
 
+    & div > a {
+      font-weight: 700;
+      text-decoration: none;
+      color: #444444;
+      padding-left: 1rem;
+
+      :hover {
+        color: #f30067;
+      }
+    }
+
     & #linkurl {
       font-weight: 700;
       text-decoration: none;
       color: #444444;
+
+      :hover {
+        color: #f30067;
+      }
     }
 
     // Error / Loading / Notfound
@@ -141,7 +156,6 @@ const Body = styled.div`
     }
 
     & .EventContainer {
-      width: 640px;
       position: relative;
       display: flex;
       align-self: center;
@@ -153,9 +167,13 @@ const Body = styled.div`
       overflow: hidden;
       transition: 0.2s ease-in-out;
 
+      & img {
+        width: 100%;
+      }
+
       & .TextContainer {
         position: absolute;
-        width: inherit;
+        width: 100%;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -167,7 +185,7 @@ const Body = styled.div`
         & h2 {
           color: #f30067;
           text-shadow: 1px 1px #eaeaea;
-          font-size: 2rem;
+          font-size: 4rem;
         }
 
         & p {

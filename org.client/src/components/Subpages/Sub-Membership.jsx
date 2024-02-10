@@ -1,9 +1,9 @@
 import React from "react";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const Membership = () => {
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <title>ORG - Membership</title>
         <meta
@@ -41,7 +41,7 @@ const Membership = () => {
           <a href="https://ebas.sverok.se/blimedlem/25677">Bli medlem nu!</a>
         </div>
       </div>
-    </>
+    </HelmetProvider>
   );
 };
 export default Membership;

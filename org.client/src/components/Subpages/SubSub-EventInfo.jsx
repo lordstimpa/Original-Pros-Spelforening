@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import API from "../API/API";
 import Loading from "../Subpages/Loading";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const EventInfo = () => {
   const { id } = useParams();
@@ -13,20 +13,20 @@ const EventInfo = () => {
     `https://orgspelforening.azurewebsites.net/api/Events/all-event-information/${id}`
   );
 
-    const formatDescription = (description) => {
-        if (!description) return { __html: "" };
+  const formatDescription = (description) => {
+    if (!description) return { __html: "" };
 
-        const urlRegex = /(https?:\/\/[^\s]+)/g;
-        const formattedDescription = description.replace(urlRegex, (url) => {
-            return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
-        });
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const formattedDescription = description.replace(urlRegex, (url) => {
+      return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+    });
 
-        const finalDescription = formattedDescription.replace(/\n/g, "<br>");
-        return { __html: finalDescription };
-    };
+    const finalDescription = formattedDescription.replace(/\n/g, "<br>");
+    return { __html: finalDescription };
+  };
 
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <title>ORG - Event Information</title>
         <meta
@@ -74,7 +74,7 @@ const EventInfo = () => {
           </>
         )}
       </div>
-    </>
+    </HelmetProvider>
   );
 };
 

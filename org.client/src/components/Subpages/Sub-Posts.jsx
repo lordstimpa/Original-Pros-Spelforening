@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import API from "../API/API";
 import Gamer from "../../assets/gamer.jpg";
 import Loading from "../Subpages/Loading";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const Body = styled.div`
   min-width: 100%;
@@ -154,7 +154,7 @@ const Posts = () => {
   }, [postId, navigate, isLoading, response]);
 
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <title>ORG - Latest News</title>
         <meta
@@ -198,7 +198,7 @@ const Posts = () => {
             ))}
         </div>
       </Body>
-    </>
+    </HelmetProvider>
   );
 };
 

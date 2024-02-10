@@ -1,9 +1,9 @@
 import React from "react";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const AnnualReports = () => {
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <title>ORG - Annual Reports</title>
         <meta
@@ -18,7 +18,7 @@ const AnnualReports = () => {
       <div className="Info">
         <h2>Årsredovisningar</h2>
       </div>
-    </>
+    </HelmetProvider>
   );
 };
 

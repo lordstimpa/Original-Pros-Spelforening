@@ -1,9 +1,9 @@
 import React from "react";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const Statutes = () => {
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <title>ORG - Statutes</title>
         <meta
@@ -260,7 +260,7 @@ const Statutes = () => {
           </p>
         </div>
       </div>
-    </>
+    </HelmetProvider>
   );
 };
 

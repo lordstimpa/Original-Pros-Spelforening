@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { SlArrowDown } from "react-icons/sl";
 import Gamer from "../../assets/gamer.jpg";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const Background = styled.div`
   position: fixed;
@@ -122,8 +122,8 @@ const Hero = ({ generalRef }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-      setScrollPosition(Math.min(newScrollPosition, 100));
+      const newScrollPosition = Math.min(window.scrollY, 100);
+      setScrollPosition(newScrollPosition);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -135,38 +135,40 @@ const Hero = ({ generalRef }) => {
 
   return (
     <Body>
-      <Helmet>
-        <title>ORG Gaming Association</title>
-        <meta
-          name="description"
-          content="From small beginnings to making our common goal a reality. Creating a Gaming Association which welcomes all true gamers."
+      <HelmetProvider>
+        <Helmet>
+          <title>ORG Gaming Association</title>
+          <meta
+            name="description"
+            content="From small beginnings to making our common goal a reality. Creating a Gaming Association which welcomes all true gamers."
+          />
+        </Helmet>
+
+        <Background
+          backgroundImg={backgroundImage}
+          scrollPosition={scrollPosition}
         />
-      </Helmet>
 
-      <Background
-        backgroundImg={backgroundImage}
-        scrollPosition={scrollPosition}
-      />
+        <div className="InfoCont">
+          <div className="Title">
+            <h1>Bli en del av ORG!</h1>
+          </div>
+          <div className="Text">
+            <p>
+              Vi är en spelförening som strävar efter att samla alla
+              spelfantaster under en flagga!
+            </p>
+            <p>Bli medlem för att delta på LAN, turneringar och annat skoj.</p>
+          </div>
+          <div className="Medlem">
+            <a href="https://ebas.sverok.se/blimedlem/25677">Bli medlem nu!</a>
+          </div>
+        </div>
 
-      <div className="InfoCont">
-        <div className="Title">
-          <h1>Bli en del av ORG!</h1>
+        <div className="PointerContainer">
+          <SlArrowDown className="Pointer" onClick={handleClick} />
         </div>
-        <div className="Text">
-          <p>
-            Vi är en spelförening som strävar efter att samla alla spelfantaster
-            under en flagga!
-          </p>
-          <p>Bli medlem för att delta på LAN, turneringar och annat skoj.</p>
-        </div>
-        <div className="Medlem">
-          <a href="https://ebas.sverok.se/blimedlem/25677">Bli medlem nu!</a>
-        </div>
-      </div>
-
-      <div className="PointerContainer">
-        <SlArrowDown className="Pointer" onClick={handleClick} />
-      </div>
+      </HelmetProvider>
     </Body>
   );
 };

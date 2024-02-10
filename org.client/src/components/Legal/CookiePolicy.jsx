@@ -1,8 +1,8 @@
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const CookiePolicy = () => {
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <title>ORG - Cookie Policy</title>
         <meta
@@ -107,7 +107,7 @@ const CookiePolicy = () => {
           </a>
         </div>
       </div>
-    </>
+    </HelmetProvider>
   );
 };
 

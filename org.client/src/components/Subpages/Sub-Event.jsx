@@ -1,8 +1,8 @@
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const Event = () => {
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <title>ORG - Event</title>
         <meta
@@ -18,7 +18,7 @@ const Event = () => {
           <h2>Event</h2>
         </div>
       </div>
-    </>
+    </HelmetProvider>
   );
 };
 
