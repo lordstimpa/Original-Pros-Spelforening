@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using org_api.Service;
+using sun.security.krb5.@internal.rcache;
 using System.Text.Json;
 
 namespace org_api.Controllers
@@ -10,21 +12,23 @@ namespace org_api.Controllers
     {
         private readonly KeyService _keyService;
         private readonly HttpClient _httpClient;
+        private readonly IMemoryCache _cache;
 
-        public EventsController(KeyService keyService, HttpClient httpClient)
+        public EventsController(KeyService keyService, HttpClient httpClient, IMemoryCache memoryCache)
         {
             _keyService = keyService;
             _httpClient = httpClient;
+            _cache = memoryCache;
         }
 
         [HttpGet("all-upcomming-events")]
-
         public async Task<IActionResult> GetAllUpcommingEvents()
         {
+            if (_cache.TryGetValue("UpcomingEvents", out List<object> cachedEventInfoList))
+                return Ok(cachedEventInfoList);
+
             if (string.IsNullOrEmpty(_keyService.PageAccessToken))
-            {
                 throw new Exception("Long-lived page access token is not set.");
-            }
 
             string pageId = _keyService.PageId;
             string pageAccessToken = _keyService.PageAccessToken;
@@ -38,7 +42,7 @@ namespace org_api.Controllers
 
             var jsonResponse = JsonSerializer.Deserialize<JsonElement>(responseContent);
 
-            List<object> eventInfoList = new List<object>();
+            var eventInfoList = new List<object>();
             if (jsonResponse.TryGetProperty("data", out var dataElement) && dataElement.ValueKind == JsonValueKind.Array)
             {
                 foreach (var eventData in dataElement.EnumerateArray())
@@ -71,16 +75,19 @@ namespace org_api.Controllers
                 }
             }
 
+            _cache.Set("UpcomingEvents", eventInfoList, TimeSpan.FromMinutes(30));
+
             return Ok(eventInfoList);
         }
 
         [HttpGet("all-past-events")]
         public async Task<IActionResult> GetAllPastEvents()
         {
+            if (_cache.TryGetValue("PastEvents", out List<object> cachedEventInfoList))
+                return Ok(cachedEventInfoList);
+
             if (string.IsNullOrEmpty(_keyService.PageAccessToken))
-            {
                 throw new Exception("Long-lived page access token is not set.");
-            }
 
             string pageId = _keyService.PageId;
             string pageAccessToken = _keyService.PageAccessToken;
@@ -128,16 +135,19 @@ namespace org_api.Controllers
                 }
             }
 
+            _cache.Set("PastEvents", eventInfoList, TimeSpan.FromMinutes(30));
+
             return Ok(eventInfoList);
         }
 
         [HttpGet("all-event-information/{eventId}")]
         public async Task<IActionResult> GetEventInformation(string eventId)
         {
+            if (_cache.TryGetValue("EventInfo", out List<object> cachedEventInfoList))
+                return Ok(cachedEventInfoList);
+
             if (string.IsNullOrEmpty(_keyService.PageAccessToken))
-            {
                 throw new Exception("Long-lived page access token is not set.");
-            }
 
             string pageAccessToken = _keyService.PageAccessToken;
             string graphApiVersion = "v17.0";
@@ -169,6 +179,8 @@ namespace org_api.Controllers
                     start_time = _startTimeFormatted,
                     id = _id,
                 };
+
+                _cache.Set("EventInfo", eventInfo, TimeSpan.FromMinutes(30));
 
                 return Ok(eventInfo);
             }

@@ -14,6 +14,7 @@ public class Program
         builder.Services.AddAuthorization();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+        builder.Services.AddMemoryCache();
 
         // CORS policy registration
         builder.Services.AddCors(options =>

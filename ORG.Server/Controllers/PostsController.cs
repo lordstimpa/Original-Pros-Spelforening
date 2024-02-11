@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using org_api.Service;
+using sun.security.krb5.@internal.rcache;
 using System.Text.Json;
 
 namespace org_api.Controllers
@@ -10,20 +12,23 @@ namespace org_api.Controllers
     {
         private readonly KeyService _keyService;
         private readonly HttpClient _httpClient;
+        private readonly IMemoryCache _cache;
 
-        public PostsController(KeyService keyService, HttpClient httpClient)
+        public PostsController(KeyService keyService, HttpClient httpClient, IMemoryCache memoryCache)
         {
             _keyService = keyService;
             _httpClient = httpClient;
+            _cache = memoryCache;
         }
 
         [HttpGet("all-posts")]
         public async Task<IActionResult> GetAllPostsFromCompanyPage()
         {
+            if (_cache.TryGetValue("AllPosts", out List<object> cachedPostInfo))
+                return Ok(cachedPostInfo);
+
             if (string.IsNullOrEmpty(_keyService.PageAccessToken))
-            {
                 return BadRequest("Long-lived page access token is not set.");
-            }
 
             string pageId = _keyService.PageId;
             string pageAccessToken = _keyService.PageAccessToken;
@@ -73,16 +78,19 @@ namespace org_api.Controllers
                 }
             }
 
+            _cache.Set("AllPosts", postList, TimeSpan.FromMinutes(30));
+
             return Ok(postList);
         }
 
         [HttpGet("all-post-dates")]
         public async Task<IActionResult> GetAllPostDatesFromCompanyPage()
         {
+            if (_cache.TryGetValue("AllPostDates", out List<object> cachedPostInfo))
+                return Ok(cachedPostInfo);
+
             if (string.IsNullOrEmpty(_keyService.PageAccessToken))
-            {
                 return BadRequest("Long-lived page access token is not set.");
-            }
 
             string pageId = _keyService.PageId;
             string pageAccessToken = _keyService.PageAccessToken;
@@ -118,6 +126,8 @@ namespace org_api.Controllers
                     }
                 }
             }
+
+            _cache.Set("AllPostDates", postInfoList, TimeSpan.FromMinutes(30));
 
             return Ok(postInfoList);
         }
