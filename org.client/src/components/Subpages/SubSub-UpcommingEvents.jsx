@@ -12,8 +12,6 @@ const UpcommingEvents = () => {
     "https://orgspelforening.azurewebsites.net/api/Events/all-upcomming-events"
   );
 
-  console.log(events);
-
   return (
     <HelmetProvider>
       <Helmet>
