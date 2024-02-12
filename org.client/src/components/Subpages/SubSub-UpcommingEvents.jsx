@@ -58,7 +58,7 @@ const UpcommingEvents = () => {
               <div className="TextContainer">
                 <h2>{event.name}</h2>
                 <p>
-                  {event.start_date} - {event.start_time}
+                  {event.start_date} - {event.start_time} CET
                 </p>
               </div>
               <img src={event.cover_source} alt="Event cover image." />

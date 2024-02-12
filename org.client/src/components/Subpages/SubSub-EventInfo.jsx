@@ -60,7 +60,7 @@ const EventInfo = () => {
             <div className="EventHeader">
               <h3 className="EventName">{eventInfo.name}</h3>
               <h3>
-                {eventInfo.start_date} - {eventInfo.start_time}
+                {eventInfo.start_date} - {eventInfo.start_time} CET
               </h3>
             </div>
 

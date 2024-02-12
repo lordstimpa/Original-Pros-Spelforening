@@ -33,7 +33,7 @@ namespace org_api.Controllers
             string pageId = _keyService.PageId;
             string pageAccessToken = _keyService.PageAccessToken;
             string graphApiVersion = "v17.0";
-            DateTime currentDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.Utc);
+            DateTime currentDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.Now, TimeZoneInfo.Local);
 
             string url = $"https://graph.facebook.com/{graphApiVersion}/{pageId}/events?fields=id,name,start_time,cover&since={currentDate:s}&access_token={pageAccessToken}";
 

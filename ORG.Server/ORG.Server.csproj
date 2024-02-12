@@ -33,8 +33,4 @@
     </ProjectReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="wwwroot\dist\sitemap.xml" />
-  </ItemGroup>
-
 </Project>
