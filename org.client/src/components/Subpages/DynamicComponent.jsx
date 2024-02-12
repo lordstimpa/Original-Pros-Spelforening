@@ -185,7 +185,7 @@ const Body = styled.div`
         & h2 {
           color: #f30067;
           text-shadow: 1px 1px #eaeaea;
-          font-size: 4rem;
+          font-size: 3rem;
         }
 
         & p {

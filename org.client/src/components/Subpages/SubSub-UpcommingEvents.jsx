@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Loading from "../Subpages/Loading";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
-const PastEvents = () => {
+const UpcommingEvents = () => {
   const {
     data: events,
     isError,
@@ -11,6 +11,8 @@ const PastEvents = () => {
   } = API(
     "https://orgspelforening.azurewebsites.net/api/Events/all-upcomming-events"
   );
+
+  console.log(events);
 
   return (
     <HelmetProvider>
@@ -67,4 +69,4 @@ const PastEvents = () => {
   );
 };
 
-export default PastEvents;
+export default UpcommingEvents;

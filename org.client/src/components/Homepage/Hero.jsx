@@ -5,12 +5,15 @@ import { SlArrowDown } from "react-icons/sl";
 import Gamer from "../../assets/gamer.jpg";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
-const Background = styled.div`
+const Background = styled.div.attrs((props) => ({
+  style: {
+    bottom: `${props.scrollPosition * 0.3}px`,
+  },
+}))`
   position: fixed;
   left: 0;
   width: 100%;
   height: 100%;
-  bottom: ${(props) => props.scrollPosition * 0.3}px;
   background-image: url(${(props) => props.backgroundImg});
   background-size: cover;
   background-position: center;
@@ -113,21 +116,19 @@ const Body = styled.div`
 
 const Hero = ({ generalRef }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const backgroundImage = Gamer;
 
   const handleClick = () => {
     generalRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const backgroundImage = Gamer;
-
   useEffect(() => {
     const handleScroll = () => {
-      const newScrollPosition = Math.min(window.scrollY, 100);
-      setScrollPosition(newScrollPosition);
+      setScrollPosition(window.scrollY);
     };
+    handleScroll();
 
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
