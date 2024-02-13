@@ -36,8 +36,9 @@ namespace org_api.Controllers
 
             TimeZoneInfo cetZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
             DateTime currentDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, cetZone);
+            string formattedCurrentDate = currentDate.ToString("s");
 
-            string url = $"https://graph.facebook.com/{graphApiVersion}/{pageId}/events?fields=id,name,start_time,cover&since={currentDate:s}&access_token={pageAccessToken}";
+            string url = $"https://graph.facebook.com/{graphApiVersion}/{pageId}/events?fields=id,name,start_time,cover&since={formattedCurrentDate}&access_token={pageAccessToken}";
 
             HttpResponseMessage response = await _httpClient.GetAsync(url);
             string responseContent = await response.Content.ReadAsStringAsync();
